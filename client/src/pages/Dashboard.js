@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../App.css';
 
 const AlertMessage = ({ message, type, onClose }) => {
@@ -82,6 +83,7 @@ const UrlCard = ({ url, onCopy, onDelete, onViewStats, index }) => (
 );
 
 function Dashboard() {
+  const navigate = useNavigate();
   const [originalUrl, setOriginalUrl] = useState('');
   const [customCode, setCustomCode] = useState('');
   const [urls, setUrls] = useState([]);
@@ -193,8 +195,8 @@ function Dashboard() {
   }, [fetchUrls, showAlert]);
 
   const viewStats = useCallback((shortCode) => {
-    window.location.href = `/code/${shortCode}`;
-  }, []);
+    navigate(`/code/${shortCode}`);
+  }, [navigate]);
 
   return (
     <div className="app">
